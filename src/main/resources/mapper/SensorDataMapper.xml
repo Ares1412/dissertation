@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wx.dissertation.repository.SensorDataMapper">
+    <resultMap id="ResultMap" type="SensorData">
+        <result property="id" column="id"/>
+        <result property="data" column="data"/>
+        <result property="error_upper" column="error_upper"/>
+        <result property="error_lower" column="error_lower"/>
+        <result property="time" column="time"/>
+        <result property="timestamp" column="create_time"/>
+    </resultMap>
+
+    <insert id="addData" parameterType="SensorData">
+        insert into sensor_data(id, data, error_upper, error_lower, time) values
+        (#{id},#{data},#{error_upper},#{error_lower},#{time})
+    </insert>
+
+    <select id="selectByIdAndDate" resultMap="ResultMap">
+        select * from sensor_data
+        where id = #{id} and
+        time like CONCAT(#{date},"%")
+    </select>
+
+    <select id="selectById" parameterType="java.lang.String" resultMap="ResultMap">
+        select * from sensor_data
+        where id = #{id}
+    </select>
+
+</mapper>

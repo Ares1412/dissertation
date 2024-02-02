@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wx.dissertation.repository.UserMapper">
+    <resultMap id="ResultMap" type="User">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="password" column="password"/>
+        <result property="timestamp" column="create_time"/>
+    </resultMap>
+
+    <insert id="addUser" parameterType="User">
+        insert into user_info(id,name,password) values
+        (#{id},#{name},#{password})
+    </insert>
+
+    <delete id="deleteById" parameterType="java.lang.String">
+        delete from user_info
+        where id = #{id}
+    </delete>
+
+    <update id="update" parameterType="User">
+        update user_info
+        set name = #{name},password = #{password}
+        where id = #{id}
+    </update>
+
+    <select id="selectByName" parameterType="java.lang.String" resultMap="ResultMap">
+        select * from user_info
+        where name = #{name}
+    </select>
+
+</mapper>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wx.dissertation.repository.SensorMapper">
+    <resultMap id="ResultMap" type="Sensor">
+        <result property="id" column="id"/>
+        <result property="type" column="type"/>
+        <result property="longitude" column="longitude"/>
+        <result property="latitude" column="latitude"/>
+        <result property="timestamp" column="create_time"/>
+    </resultMap>
+
+    <insert id="addSensor" parameterType="Sensor">
+        insert into sensor_info(id, type, longitude, latitude) values
+        (#{id},#{type},#{longitude},#{latitude})
+    </insert>
+
+    <select id="selectById" parameterType="java.lang.String" resultMap="ResultMap">
+        select * from sensor_info
+        where id = #{id}
+    </select>
+
+    <delete id="deleteById" parameterType="java.lang.String">
+        delete from sensor_info where
+        id = #{id}
+    </delete>
+
+    <select id="selectAll" resultMap="ResultMap">
+        select * from sensor_info
+    </select>
+
+</mapper>
